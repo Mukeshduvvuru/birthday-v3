@@ -16,24 +16,24 @@ export default function PhotosScreen({ onNext }) {
 
   const polaroidPositions = [
     { 
-      top: '10%', 
-      left: '15%',
-      rotation: { rotateY: -12, rotateZ: -8 }
+      left: '10%',
+      top: '80px',
+      rotation: { rotateY: -8, rotateZ: -6 }
     },
     { 
-      top: '15%', 
-      right: '18%',
-      rotation: { rotateY: 15, rotateZ: 6 }
+      left: '32%',
+      top: '120px',
+      rotation: { rotateY: 10, rotateZ: 5 }
     },
     { 
-      bottom: '25%', 
-      left: '20%',
-      rotation: { rotateY: 8, rotateZ: -5 }
+      left: '54%',
+      top: '60px',
+      rotation: { rotateY: -5, rotateZ: -4 }
     },
     { 
-      bottom: '20%', 
-      right: '15%',
-      rotation: { rotateY: -10, rotateZ: 7 }
+      left: '76%',
+      top: '100px',
+      rotation: { rotateY: 8, rotateZ: 6 }
     },
   ]
 
@@ -67,7 +67,7 @@ export default function PhotosScreen({ onNext }) {
         </motion.p>
       </div>
 
-      {/* 3D Polaroid Wall Container */}
+      {/* 3D Polaroid Hanger Container */}
       <div 
         className="relative mx-auto"
         style={{ 
@@ -77,6 +77,14 @@ export default function PhotosScreen({ onNext }) {
           transformStyle: 'preserve-3d'
         }}
       >
+        {/* Clothesline/Hanger String */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-fuchsia-300/40 to-transparent" 
+          style={{ 
+            boxShadow: '0 0 10px rgba(232, 121, 249, 0.3)',
+            top: '40px'
+          }}
+        />
+        
         {/* Ambient particles */}
         {particlePositions.map((particle, i) => (
           <motion.div
@@ -101,17 +109,69 @@ export default function PhotosScreen({ onNext }) {
           />
         ))}
 
-        {/* Polaroid Photos */}
+        {/* Hanging Polaroid Photos */}
         {photos.map((src, index) => (
-          <Polaroid3D
+          <div 
             key={index}
-            src={src}
-            alt={`Memory ${index + 1}`}
-            index={index}
-            position={polaroidPositions[index]}
-            rotation={polaroidPositions[index].rotation}
-            delay={index * 0.2}
-          />
+            className="absolute"
+            style={{
+              left: polaroidPositions[index].left,
+              top: '40px',
+            }}
+          >
+            {/* Hanging String */}
+            <motion.div 
+              className="absolute left-1/2 w-[1px] bg-fuchsia-200/30"
+              style={{
+                height: polaroidPositions[index].top,
+                transformOrigin: 'top center',
+              }}
+              animate={{
+                rotateZ: [
+                  polaroidPositions[index].rotation.rotateZ - 2,
+                  polaroidPositions[index].rotation.rotateZ + 2,
+                  polaroidPositions[index].rotation.rotateZ - 2
+                ]
+              }}
+              transition={{
+                duration: 3 + index * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 0.3
+              }}
+            />
+            
+            {/* Photo with swing animation */}
+            <motion.div
+              style={{
+                position: 'relative',
+                top: polaroidPositions[index].top,
+                transformOrigin: 'top center',
+              }}
+              animate={{
+                rotateZ: [
+                  polaroidPositions[index].rotation.rotateZ - 2,
+                  polaroidPositions[index].rotation.rotateZ + 2,
+                  polaroidPositions[index].rotation.rotateZ - 2
+                ]
+              }}
+              transition={{
+                duration: 3 + index * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 0.3
+              }}
+            >
+              <Polaroid3D
+                src={src}
+                alt={`Memory ${index + 1}`}
+                index={index}
+                position={{left: '0', top: '0'}}
+                rotation={polaroidPositions[index].rotation}
+                delay={index * 0.2}
+              />
+            </motion.div>
+          </div>
         ))}
       </div>
 
