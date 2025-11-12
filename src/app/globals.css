@@ -364,3 +364,90 @@ button {
     opacity: 0;
   }
 }
+
+/* 3D Polaroid Styling */
+.polaroid-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.polaroid {
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.polaroid-frame {
+  background: linear-gradient(to bottom, #fefefe 0%, #f8f8f8 100%);
+  padding: 12px;
+  padding-bottom: 45px;
+  border-radius: 4px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.polaroid-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.polaroid-image {
+  width: 240px;
+  height: 240px;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  font-family: 'Kalam', cursive;
+}
+
+.polaroid:hover {
+  filter: brightness(1.05);
+}
+
+/* Ambient particles for polaroid wall */
+.polaroid-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.6), transparent);
+  border-radius: 50%;
+  animation: floatParticle 8s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.8;
+    transform: translate(20px, -30px) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-15px, -60px) scale(1.2);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translate(30px, -90px) scale(0.8);
+  }
+}
