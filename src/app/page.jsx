@@ -4,8 +4,7 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import LoaderScreen from "@/components/screens/LoaderScreen"
 import IntroScreen from "@/components/screens/IntroScreen"
-import CakeScreen from "@/components/screens/CakeScreen"
-import PhotosScreen from "@/components/screens/PhotosScreen"
+import CakeAndPhotosScreen from "@/components/screens/CakeAndPhotosScreen"
 import MessageScreen from "@/components/screens/MessageScreen"
 import FloatingCube from "@/components/FloatingCube"
 import Sphere3D from "@/components/Sphere3D"
@@ -17,9 +16,8 @@ export default function HomePage() {
   const screens = [
     <LoaderScreen key="loader" onDone={() => setCurrentScreen(1)} />,
     <IntroScreen key="intro" onNext={() => setCurrentScreen(2)} />,
-    <CakeScreen key="cake" onNext={() => setCurrentScreen(3)} />,
-    <PhotosScreen key="photos" onNext={() => setCurrentScreen(4)} />,
-    <MessageScreen key="message" onNext={() => setCurrentScreen(5)} />,
+    <CakeAndPhotosScreen key="cake-photos" onNext={() => setCurrentScreen(3)} />,
+    <MessageScreen key="message" onNext={() => setCurrentScreen(4)} />,
   ]
 
   return (
@@ -47,7 +45,7 @@ export default function HomePage() {
             animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
             exit={{ opacity: 0, transition: { duration: 0.8 } }}
             transition={{ duration: 0.8 }}
-            className={`w-full ${currentScreen === 4 ? "max-w-7xl" : "max-w-3xl md:max-w-4xl"}`}
+            className={`w-full ${currentScreen === 3 ? "max-w-7xl" : currentScreen === 2 ? "max-w-6xl" : "max-w-3xl md:max-w-4xl"}`}
           >
             {screens[currentScreen]}
           </motion.div>
