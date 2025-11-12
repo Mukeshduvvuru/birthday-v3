@@ -18,7 +18,7 @@ export default function LoaderScreen({ onDone }) {
             })
         }, 900)
         return () => clearInterval(t)
-    }, [])
+    }, [onDone])
 
     return (
         <div className="w-full grid place-items-center">

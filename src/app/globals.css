@@ -415,7 +415,7 @@ button {
   left: 12px;
   right: 12px;
   text-align: center;
-  font-family: 'Kalam', cursive;
+  font-family: inherit;
 }
 
 .polaroid:hover {

@@ -13,10 +13,10 @@ export default function CakeAndPhotosScreen({ onNext }) {
   const [lit, setLit] = useState(false)
 
   const photos = [
-    "/images/1.jpeg",
-    "/images/2.jpeg",
-    "/images/3.jpeg",
-    "/images/4.jpeg",
+    "/images/1.jpg",
+    "/images/2.jpg",
+    "/images/3.jpg",
+    "/images/4.jpg",
   ]
 
   const polaroidPositions = [
@@ -112,7 +112,7 @@ export default function CakeAndPhotosScreen({ onNext }) {
 
         {/* Hanging Polaroid Photos */}
         {photos.map((src, index) => (
-          <div 
+          <motion.div
             key={index}
             className="absolute"
             style={{
@@ -120,61 +120,31 @@ export default function CakeAndPhotosScreen({ onNext }) {
               top: '60px',
               opacity: 0.7,
               filter: 'brightness(0.8)',
+              transformOrigin: 'top center',
+            }}
+            animate={{
+              rotateZ: [
+                polaroidPositions[index].rotation.rotateZ - 2,
+                polaroidPositions[index].rotation.rotateZ + 2,
+                polaroidPositions[index].rotation.rotateZ - 2
+              ]
+            }}
+            transition={{
+              duration: 3 + index * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.3
             }}
           >
-            {/* Hanging String */}
-            <motion.div 
-              className="absolute left-1/2 w-[1px] bg-fuchsia-200/30"
-              style={{
-                height: polaroidPositions[index].top,
-                transformOrigin: 'top center',
-              }}
-              animate={{
-                rotateZ: [
-                  polaroidPositions[index].rotation.rotateZ - 2,
-                  polaroidPositions[index].rotation.rotateZ + 2,
-                  polaroidPositions[index].rotation.rotateZ - 2
-                ]
-              }}
-              transition={{
-                duration: 3 + index * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: index * 0.3
-              }}
+            <Polaroid3D
+              src={src}
+              alt={`Memory ${index + 1}`}
+              index={index}
+              position={{left: '0', top: polaroidPositions[index].top}}
+              rotation={polaroidPositions[index].rotation}
+              delay={index * 0.2}
             />
-            
-            {/* Photo with swing animation */}
-            <motion.div
-              style={{
-                position: 'relative',
-                top: polaroidPositions[index].top,
-                transformOrigin: 'top center',
-              }}
-              animate={{
-                rotateZ: [
-                  polaroidPositions[index].rotation.rotateZ - 2,
-                  polaroidPositions[index].rotation.rotateZ + 2,
-                  polaroidPositions[index].rotation.rotateZ - 2
-                ]
-              }}
-              transition={{
-                duration: 3 + index * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: index * 0.3
-              }}
-            >
-              <Polaroid3D
-                src={src}
-                alt={`Memory ${index + 1}`}
-                index={index}
-                position={{left: '0', top: '0'}}
-                rotation={polaroidPositions[index].rotation}
-                delay={index * 0.2}
-              />
-            </motion.div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -188,7 +158,7 @@ export default function CakeAndPhotosScreen({ onNext }) {
               animate={{ opacity: 1, scale: 1, }}
               transition={{ duration: 1, ease: "easeOut", delay: 1.5 }}
             >
-              Happy Birthday, Cutiepie!
+              Happy Birthday, Dwibhashini!
             </motion.div>
           )}
           

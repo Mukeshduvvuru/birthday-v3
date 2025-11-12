@@ -8,26 +8,6 @@ export default function IntroScreen({ onNext }) {
     return (
         <div className="py-10 md:py-14 text-center" style={{ perspective: '1000px' }}>
             <div className="flex flex-col items-center gap-6">
-                <motion.img
-                    src="/gifs/intro.gif"
-                    alt="Cute birthday animation topper"
-                    className="w-[140px] md:w-[180px]  object-cover"
-                    initial={{ opacity: 0, scale: 0.5, rotateY: -30 }}
-                    animate={{ 
-                        opacity: 1, 
-                        scale: 1, 
-                        rotateY: 0,
-                        y: [0, -10, 0]
-                    }}
-                    transition={{ 
-                        opacity: { duration: 0.8 },
-                        scale: { duration: 0.8 },
-                        rotateY: { duration: 1.2, type: "spring" },
-                        y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                    whileHover={{ scale: 1.1, rotateZ: 5 }}
-                />
-
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
