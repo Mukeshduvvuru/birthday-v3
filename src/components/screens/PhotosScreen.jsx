@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useMemo } from "react"
 import { Mail } from "lucide-react"
 import GradientButton from "../GradientButton"
 import Polaroid3D from "../Polaroid3D"
@@ -36,6 +37,15 @@ export default function PhotosScreen({ onNext }) {
     },
   ]
 
+  const particlePositions = useMemo(() => {
+    return Array.from({ length: 15 }, (_, i) => ({
+      left: `${20 + (i * 7) % 60}%`,
+      top: `${20 + (i * 11) % 60}%`,
+      delay: i * 0.5,
+      xOffset: ((i * 13) % 100 - 50) / 2,
+    }))
+  }, [])
+
   return (
     <div className="px-4 md:px-6 py-10 min-h-screen relative">
       <div className="text-center mb-12">
@@ -68,24 +78,24 @@ export default function PhotosScreen({ onNext }) {
         }}
       >
         {/* Ambient particles */}
-        {[...Array(15)].map((_, i) => (
+        {particlePositions.map((particle, i) => (
           <motion.div
             key={i}
             className="polaroid-particle"
             style={{
-              left: `${20 + Math.random() * 60}%`,
-              top: `${20 + Math.random() * 60}%`,
+              left: particle.left,
+              top: particle.top,
             }}
             animate={{
               y: [0, -100],
-              x: [0, (Math.random() - 0.5) * 50],
+              x: [0, particle.xOffset],
               opacity: [0, 0.6, 0],
               scale: [0, 1, 0]
             }}
             transition={{
-              duration: 5 + Math.random() * 3,
+              duration: 5 + (i % 3),
               repeat: Infinity,
-              delay: i * 0.5,
+              delay: particle.delay,
               ease: "easeInOut"
             }}
           />
