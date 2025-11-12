@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import GradientButton from "../GradientButton"
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
-export default function MessageScreen({ onNext }) {
+export default function MessageScreen({ onNext, onBack }) {
     const [flipped, setFlipped] = useState(false);
 
     return (
@@ -37,6 +37,20 @@ export default function MessageScreen({ onNext }) {
                     </p>
                 </motion.div>
             </div>
+
+            {onBack && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="mt-8 flex justify-center"
+                >
+                    <GradientButton onClick={onBack}>
+                        <ArrowLeft size={20} className="mt-0.5" />
+                        Back
+                    </GradientButton>
+                </motion.div>
+            )}
         </div>
     )
 }

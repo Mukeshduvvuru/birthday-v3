@@ -451,3 +451,16 @@ button {
     transform: translate(30px, -90px) scale(0.8);
   }
 }
+
+/* Hide Next.js error overlay badge */
+nextjs-portal {
+  display: none !important;
+}
+
+[data-nextjs-toast] {
+  display: none !important;
+}
+
+#__next-build-watcher {
+  display: none !important;
+}
